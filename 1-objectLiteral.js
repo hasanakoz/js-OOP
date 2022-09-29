@@ -52,5 +52,24 @@ console.log(book3);
 
 Book.prototype.getAge = function () {
   return new Date().getFullYear() - this.year;
-};
+}; //Book constructor prototype'ına fonksiyon ekliyoruz.
 console.log(book4.getAge());
+
+//* Ornegin Book nesnesinin tum instance'lari getAge() fonksiyonunu miras alabilir.
+//* Ancak, getAge() fonksiyonu bellekte sadece bir yer kaplamaktadir.
+//* Bir nesnenin prototiplerine .prototype ile erisilebilir.
+//* Ancak bir instance'in prototiplerine .__proto__ ile erisilmektedir.
+
+//INHERİTANCE************************
+
+function Magazine(title, author, year, month) {
+  Book.call(this, title, author, year);
+  this.month = month;
+}
+
+Magazine.prototype = Object.create(Book.prototype); // bu metodla prototype inherit edilebilir.
+
+const mag1 = new Magazine("Scientific Research", "Einstein", 1926, "September");
+
+console.log(mag1);
+console.log(mag1.getAge()); //prototype'dan otomatik inheritance olmuyor.
