@@ -11,3 +11,40 @@
 
 //? Bir parent class'in degisken ve fonksiyonelliği extends
 //? keyword'u ile child class'a gecmektedir.(INHERITANCE)
+
+class Book {
+  constructor(title, author, year) {
+    this.author = author;
+    this.title = title;
+    this.year = year;
+    this.getTitle = function () {
+      //Bu alandaki fonksiyon bütün instancelarda yer alır.
+      return this.title;
+    };
+  }
+
+  getAge() {
+    // Bu fonksiyonlar prototype de yeralır.
+    return new Date().getFullYear() - this.year;
+  }
+
+  getSummary() {
+    return `${this.title} was written by ${this.author} in ${this.year}`;
+  }
+}
+
+const book1 = new Book("Kaşağı", "Ömer Seyfettin", 1920);
+
+console.log(book1.getAge());
+
+//**********INHERITANCE */
+
+class Magazine extends Book {
+  constructor(title, author, year, month) {
+    super(title, author, year);
+    this.month = month;
+  }
+}
+
+const mag1 = new Magazine("scientific Research", "Einstein", 1926, "sep");
+console.log(mag1);
